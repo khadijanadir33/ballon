@@ -4,7 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="stylesheet"  href="ballon.css">
+     <style>
+      *{
+margin: 0;
+padding: 0;
+}
+#ball{
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-color: red;
+    border-radius: 50%;
+    top:30%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+body{
+    background-color: burlywood;
+}
+     </style>
    
     <title>Document</title>
 </head>
@@ -13,6 +31,84 @@
 
 
 
-  <script src ="ballon.js"></script>
+  <script>
+     const c=document.getElementById('ball')
+ var widt,heigh
+
+c.onclick=function(){
+     widt=parseInt(window.getComputedStyle(c).getPropertyValue("width"))
+     heigh=parseInt(window.getComputedStyle(c).getPropertyValue("height"))
+    let color=window.getComputedStyle(c).getPropertyValue("background-color")
+    let size=window.getComputedStyle(c).getPropertyValue("width")
+    // console.log(size)
+ 
+    if(size<"420px")
+    {
+        widt=widt+10
+        heigh=heigh+10
+        this.style.width=widt+"px"
+        this.style.height=heigh+"px"
+        this.style.backgroundColor="green"
+       
+           if(color=="rgb(0, 128, 0)"){
+              this.style.backgroundColor="blue"
+           }
+           else if(color=="rgb(0, 0, 255)")
+           {
+            this.style.backgroundColor="red"
+           }
+       
+    }
+  
+   else{
+
+    c.hidden=true;  
+         setTimeout(function(){
+            c.hidden=false;  
+            c.style.width="200px"
+            c.style.height="200px"
+            c.style.backgroundColor="red"
+         },500)   
+         widt=200
+         heigh=200
+}
+}
+c.onmouseleave=()=>{
+    widt=parseInt(window.getComputedStyle(c).getPropertyValue("width"))
+     heigh=parseInt(window.getComputedStyle(c).getPropertyValue("height"))
+     color=window.getComputedStyle(c).getPropertyValue("background-color")
+ 
+    
+    if(widt > 200)
+    {
+    c.style.width=widt-5+"px"
+    c.style.height=heigh-5+"px"
+    widt=window.getComputedStyle(c).getPropertyValue("width")
+    heigh=window.getComputedStyle(c).getPropertyValue("height")
+    if(color=="rgb(255, 0, 0)"){//red
+    c.style.backgroundColor="blue"
+    
+    }
+     else if(color=="rgb(0, 0, 255)")//blue
+     {
+      c.style.backgroundColor="green"
+     
+     }
+     else
+     {
+       c.style.backgroundColor="red"
+     }
+    }
+    
+}
+function block(event){
+    if(event.keyCode==123 || (event.ctrlKey && event.shiftKey && event.keyCode==73)){
+        event.preventDefault();
+    }
+}
+document.addEventListener('keydown',block)
+document.addEventListener('contextmenu',event=>event.preventDefault())
+
+  </script>
 </body>
 </html>
